@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexiCode Learning Dashboard</title>
+<link rel="icon" href="images/flexiicon.jpg" type="image/x-icon" />
+ 
+     
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6f7ff; /* Light blue background */
+            display: flex;
+            flex-direction: column; /* Column layout for better structure */
+        }
+
+        /* Header Styles */
+        .header {
+            position: relative;
+            background-image: url('images/header-background.png'); /* Replace with your header background image */
+            height: 300px;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #add8e6; /* Green color for navigation */
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .navbar a {
+            color: #00008b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .navbar a img {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+        }
+
+        .navbar a:hover {
+            background-color: #b0c4de;
+            transform: translateY(-2px);
+        }
+
+        .navbar a.active {
+            font-weight: bold;
+            text-decoration: underline;
+            border-bottom: 2px solid white;
+        }
+
+        /* User Info Section */
+        .user-info {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background-color: #fff;
+        }
+
+        .username, .learning-style {
+            display: flex;
+            align-items: center;
+        }
+
+        .username img, .learning-style img {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap; /* Enable wrapping for better organization */
+            gap: 20px; /* Space between sections */
+        }
+
+        /* Learning Progress Section */
+        .progress-section {
+            flex: 2;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Syllabus Overview Section */
+
+        .syllabus-overview {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        .syllabus-item img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+       .syllabus-item {
+           display: flex; /* Use flexbox to align items horizontally */
+           align-items: center; /* Vertically center the icon and text */
+           margin-bottom: 20px;
+       }
+
+     .section-title {
+        display: block;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+
+       .subtopics {
+           margin-left: 40px; /* Indent subtopics slightly under the title */
+           margin-top: 10px;
+           display: none; /* Hidden by default */
+     }
+
+    .subtopics ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .subtopic-icon {
+        width: 15px;
+        height: 15px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+        /* Progress Bar */
+        .progress-bar {
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-bar-fill {
+            background-color: #4caf50;
+            height: 20px;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        /* Audio and YouTube Icons */
+        .audio-icon, .youtube-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        /* Floating Audio Player Styles */
+        .audio-player {
+            display: none; /* Hide by default */
+            position: fixed; /* Fix position */
+            bottom: 20px; /* Position from bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center alignment */
+            background: white; /* Background for better visibility */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            padding: 10px; /* Padding for aesthetics */
+            z-index: 1000; /* Ensure it stays on top */
+        }
+        /* Support Chat Button */
+        .support-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .support-chat img {
+            width: 30px;
+            height: 30px;
+        }
+
+      
+        /* Chart Container */
+        .chart-container {
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background-color: white; /* White background */
+            padding: 20px; /* Padding around the chart */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            margin-top: 20px; /* Space above the chart */
+            width: 100%; /* Full width for responsiveness */
+        }
+
+        /* Chart Size */
+        canvas {
+            max-width: 200%; /* Responsive */
+            max-height: 400px; /* Set max height */
+        }
+
+.syllabus-item {
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.section-title {
+    font-weight: bold;
+    color: #007BFF; /* Optional color for the section title */
+}
+
+.subtopics {
+    padding-left: 20px; /* Indent subtopics */
+}
+
+.subtopics ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+.subtopics li {
+    margin: 5px 0; /* Spacing between subtopics */
+    font-size: 14px; /* Smaller font size */
+}
+
+.subtopic-icon {
+    width: 12px; /* Smaller width for the icon */
+    height: 12px; /* Smaller height for the icon */
+    vertical-align: middle; /* Align icon with text */
+    margin-right: 5px; /* Space between icon and text */
+}
+
+.loader_bg {
+    position: fixed;
+    z-index: 9999;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader img {
+    width: 200px; /* Increase the width of the logo */
+    height: auto; /* Adjust the height proportionally */
+}
+.hidden {
+    display: none;
+}
+
+
+    </style>
+ 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
+ 
+<script>
+   let currentAudio = null;
+
+function playAudio(file) {
+    // Set the audio source
+    if (!currentAudio) {
+        currentAudio = document.getElementById('audioPlayer');
+    }
+    
+    // Set the new audio source
+    currentAudio.src = file;
+    
+    // Show the audio player
+    currentAudio.style.display = 'block'; // Show audio player
+}
+
+    </script>
+</head>
+<!-- loader -->
+<div class="loader_bg">
+    <div class="loader">
+        <img src="images/flexiloader.jpg" alt="Loading..." />
+    </div>
+</div>
+
+<body>
+ 
+     
+    <!-- Header with Picture -->
+    <div class="header">
+        <div class="header-overlay">
+            <h1>FlexiCode Learning Dashboard</h1>
+            <p>Empowering Your Learning Journey</p>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <ul>
+            <li><a href="dashboard.php" class="active">
+                <img src="images/home.png" alt="Home Icon"> Home
+            </a></li>
+            <li><a href="scores.php">
+                <img src="images/scores.png" alt="Scores Icon"> Scores
+            </a></li>
+            <li><a href="syllabus.php">
+                <img src="images/module.png" alt="Syllabus Icon"> Syllabus
+            </a></li>
+            <li><a href="support_chat.php">
+                <img src="images/chat.png" alt="Chat Support Icon"> Chat Support
+            </a></li>
+            <li><a href="index.html">
+                <img src="images/logout.png" alt="Logout Icon"> Logout
+            </a></li>
+        </ul>
+    </div>
+
+    <!-- User Info Section -->
+    <div class="user-info">
+        <div class="username">
+            <img src="images/user.png" alt="User Icon"> Good day! Welcome to the Dashboard!
+        </div>
+        <div class="learning-style">
+            <img src="images/headphones.png" alt="Learning Style Icon"> Preferred Learning Style: Audio
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+
+        <!-- Learning Progress Section -->
+        <div class="progress-section">
+            <h2>Your Learning Progress</h2>
+
+             <!-- Module 1 -->
+            <div>
+                <p><b>Module 1: Introduction to Programming</b></p>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 80%;">80%</div>
+                </div>
+                <ul class="lessons-list">
+                    <li>
+                        <a href="#">Lesson 1.1: Understanding Variables</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module1_l1.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=ghCbURMWBD8" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Lesson 1.2: Control Structures</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module1_l2.mp3')" title="Play Audio">
+
+                        <a href="https://www.youtube.com/watch?v=eSYeHlwDCNA" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Lesson 1.3: Basic Algorithms</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module1_lesson1_3.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID3" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Module 2 -->
+            <div>
+                <p><b>Module 2: Functions and Scope</b></p>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 15%;">15%</div>
+                </div>
+                <ul class="lessons-list">
+                    <li>
+                        <a href="#">Lesson 2.1: Defining Functions</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module2_lesson2_1.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID4" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Lesson 2.2: Closures and Scope</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module2_lesson2_2.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID5" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Module 3 -->
+            <div>
+                <p><b>Module 3: Object-Oriented Programming in Java</b></p>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 10%;">10%</div>
+                </div>
+                <ul class="lessons-list">
+                    <li>
+                        <a href="#">Lesson 3.1: Classes and Objects</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module3_lesson3_1.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID6" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Lesson 3.2: Inheritance</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module3_lesson3_2.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID7" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Module 4 -->
+            <div>
+                <p><b>Module 4: Web Development Fundamentals</b></p>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 10%;">10%</div>
+                </div>
+                <ul class="lessons-list">
+                    <li>
+                        <a href="#">Lesson 4.1: HTML Basics</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module4_lesson4_1.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID8" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Lesson 4.2: CSS Styling</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module4_lesson4_2.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID9" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Module 5 -->
+            <div>
+                <p><b>Module 5: Responsive Design</b></p>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 10%;">10%</div>
+                </div>
+                <ul class="lessons-list">
+                    <li>
+                        <a href="#">Lesson 5.1: Media Queries</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module5_lesson5_1.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID10" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Lesson 5.2: Flexbox Layout</a>
+                        <img src="images/audio.png" alt="Play Audio" class="audio-icon" onclick="playAudio('audio/module5_lesson5_2.mp3')" title="Play Audio">
+                        <a href="https://www.youtube.com/watch?v=VIDEO_ID11" target="_blank" title="Watch Video">
+                            <img src="images/youtube.png" alt="YouTube Video" class="youtube-icon">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+<!-- Syllabus Overview Section -->
+<div class="syllabus-overview">
+   <h2>Syllabus Overview</h2>
+
+<div class="syllabus-item">
+    <img src="images/module.png" alt="Module Icon"> 
+    <span class="section-title" onclick="toggleSubtopics('subtopics1')">Section 1: Introduction to Programming</span>
+    <div id="subtopics1" class="subtopics" style="display: none;">
+        <ul>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Basics of Programming</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Data Types and Variables</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Control Structures</li>
+        </ul>
+    </div>
+</div>
+
+<div class="syllabus-item">
+    <img src="images/module.png" alt="Module Icon"> 
+    <span class="section-title" onclick="toggleSubtopics('subtopics2')">Section 2: Advanced Programming Concepts</span>
+    <div id="subtopics2" class="subtopics" style="display: none;">
+        <ul>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Object-Oriented Programming</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Design Patterns</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Error Handling</li>
+        </ul>
+    </div>
+</div>
+
+<div class="syllabus-item">
+    <img src="images/module.png" alt="Module Icon"> 
+    <span class="section-title" onclick="toggleSubtopics('subtopics3')">Section 3: Web Development</span>
+    <div id="subtopics3" class="subtopics" style="display: none;">
+        <ul>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> HTML & CSS Basics</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> JavaScript Fundamentals</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Responsive Design</li>
+        </ul>
+    </div>
+</div>
+
+<div class="syllabus-item">
+    <img src="images/module.png" alt="Module Icon"> 
+    <span class="section-title" onclick="toggleSubtopics('subtopics4')">Section 4: Database Management</span>
+    <div id="subtopics4" class="subtopics" style="display: none;">
+        <ul>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> SQL Basics</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Normalization</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Database Security</li>
+        </ul>
+    </div>
+</div>
+
+<div class="syllabus-item">
+    <img src="images/module.png" alt="Module Icon"> 
+    <span class="section-title" onclick="toggleSubtopics('subtopics5')">Section 5: Software Engineering Principles</span>
+    <div id="subtopics5" class="subtopics" style="display: none;">
+        <ul>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Software Development Life Cycle</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Agile Methodologies</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Version Control Systems</li>
+        </ul>
+    </div>
+</div>
+
+<div class="syllabus-item">
+    <img src="images/module.png" alt="Module Icon"> 
+    <span class="section-title" onclick="toggleSubtopics('subtopics6')">Section 6: IT Security</span>
+    <div id="subtopics6" class="subtopics" style="display: none;">
+        <ul>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Security Fundamentals</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Network Security</li>
+            <li><img src="images/chevron-right.png" alt="Subtopic Icon" class="subtopic-icon"> Ethical Hacking</li>
+        </ul>
+    </div>
+</div>
+
+
+
+   <!-- Pie Chart Section -->
+    <div class="chart-container">
+        <canvas id="learningProgressChart"></canvas>
+    </div>
+<div class="score-tally-section" style="display: flex; align-items: flex-start; justify-content: center; margin-top: 20px;">
+   
+ 
+<!-- Audio Player -->
+    <audio id="audioPlayer" controls style="display:none; position:fixed; bottom: 50%; left: 50%; transform: translate(-50%, 50%);">
+    Your browser does not support the audio tag.
+</audio>
+
+
+
+    <!-- Support Chat Button -->
+    <button class="support-chat">
+        <img src="images/chat.png" alt="Chat Icon">
+    </button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const progressBars = document.querySelectorAll('.progress-bar-fill');
+
+        progressBars.forEach(bar => {
+            const width = parseInt(bar.style.width); // Get the width percentage
+            if (width <= 50) {
+                bar.style.backgroundColor = 'red'; // Set to red if 50% or less
+            } else {
+                bar.style.backgroundColor = '#4caf50'; // Set to green otherwise
+            }
+        });
+    });
+
+const ctx = document.getElementById('learningProgressChart').getContext('2d');
+        const learningProgressChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Completed', 'In Progress', 'Not Started'],
+                datasets: [{
+                    label: 'Learning Progress',
+                    data: [2, 8, 15], // Replace with dynamic data if necessary
+                    backgroundColor: [
+                        '#4caf50', // Completed - green
+                        '#ffeb3b', // In Progress - yellow
+                        '#f44336'  // Not Started - red
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Learning Progress Distribution'
+                    }
+                }
+            }
+        });
+
+
+function toggleSubtopics(subtopicsId) {
+    var subtopics = document.getElementById(subtopicsId);
+    if (subtopics.style.display === "none" || subtopics.style.display === "") {
+        subtopics.style.display = "block";
+    } else {
+        subtopics.style.display = "none";
+    }
+}
+
+       window.addEventListener('load', function() {
+        // Delay for 2 seconds (2000 milliseconds) before hiding the loader
+        setTimeout(function() {
+            document.querySelector('.loader_bg').classList.add('hidden');
+        }, 1000); // Adjust the delay time in milliseconds as needed
+    });
+
+
+
+
+</script>
+
+</body>
+</html>
