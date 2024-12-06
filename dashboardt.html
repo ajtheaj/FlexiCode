@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexiCode Facilitator Dashboard</title>
+    <link rel="icon" href="images/flexiicon.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="css/dashstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+        <style>
+  /* Header Styles */
+        .header {
+            position: relative;
+            background-image: url('images/dashboard2-banner.jpg'); /* Replace with your header background image */
+            height: 300px;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+		</style>
+ 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
+ </head>
+<body>
+ <div class="loader_bg">
+         <div class="loader"><img src="images/flexiloader.jpg" alt="#"/></div>
+      </div>
+ 
+     
+    <!-- Header with Picture -->
+    <div class="header">
+        <div class="header-overlay">
+            <h1>FlexiCode Facilitator Dashboard</h1>
+            <p>Manage and see the status of your classes with ease</p>
+        </div>
+    </div>
+
+  <!-- Navigation Bar -->
+<div class="navbar">
+    <ul>
+        <li><a href="dashboard.php" class="active">
+            <img src="images/home.png" alt="Home Icon"> Home
+        </a></li>
+        <li><a href="classes.php">
+            <img src="images/classes.png" alt="Classes Icon"> Classes
+        </a></li>
+        <li><a href="students.php">
+            <img src="images/students.png" alt="Students Icon"> Students
+        </a></li>
+        <li><a href="modify.php">
+            <img src="images/modify.png" alt="Modify Icon"> Modify
+        </a></li>
+        <li><a href="index.html">
+            <img src="images/logout.png" alt="Logout Icon"> Logout
+        </a></li>
+    </ul>
+</div>
+
+<!-- User Info Section -->
+<div class="user-info">
+    <div class="username">
+        <img src="images/teacher.png" alt="User Icon"> Hello, Teacher! Welcome to your Dashboard!
+    </div>
+</div>
+
+<!-- Main Content Area -->
+<div class="main-content">
+
+    <!-- Classes Section -->
+    <div class="classes-section">
+        <h2>Your Classes</h2>
+        <div class="class-card">
+            <h3>IT Fundamentals [1ITSE01]</h3>
+            <p>Enrolled: 30 Students</p>
+            <button onclick="viewClass('IT Fundamentals')">View Class</button>
+        </div>
+        <div class="class-card">
+            <h3>Object-Oriented Programming [3ITSE01]</h3>
+            <p>Enrolled: 25 Students</p>
+            <button onclick="viewClass('Object-Oriented Programming')">View Class</button>
+        </div>
+		 <div class="class-card">
+            <h3>Software Project Management [2ITSE01]</h3>
+            <p>Enrolled: 30 Students</p>
+            <button onclick="viewClass('Software Project Management')">View Class</button>
+        </div>
+        <!-- Add more classes dynamically -->
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <h2>Class Progress</h2>
+        <div class="chart-container">
+            <canvas id="classProgressChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="classPerformanceChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Grading Section -->
+    <div class="grading-section">
+        <h2>Grade Students</h2>
+        <form id="gradeForm">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+
+            <label for="subject">Subject:</label>
+            <select id="subject" name="subject" required>
+                <option value="IT Fundamentals">IT Fundamentals</option>
+                <option value="Object-Oriented Programming">Object-Oriented Programming</option>
+				 <option value="Software Project Management">Software Project Management</option>
+                <!-- Add more subjects dynamically -->
+            </select>
+
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" required>
+
+            <button type="submit">Submit Grade</button>
+        </form>
+    </div>
+
+</div>
+
+<!-- Enrollment Requests Section -->
+<div class="enrollment-section">
+    <h2>Admit Student Enrollment Request</h2>
+    <form id="enrollmentForm">
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" name="studentName" required>
+
+        <label for="subject">Subject:</label>
+        <select id="subject" name="subject" required>
+            <option value="IT Fundamentals">IT Fundamentals</option>
+            <option value="Object-Oriented Programming">Object-Oriented Programming</option>
+            <option value="Software Project Management">Software Project Management</option>
+            <!-- Add more subjects dynamically -->
+        </select>
+
+        <button type="submit">Admit Student</button>
+    </form>
+</div>
+
+<!-- Scripts -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Class Progress Chart
+        const ctx1 = document.getElementById('classProgressChart').getContext('2d');
+        const classProgressChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['IT Fundamentals', 'OOP', 'SPM'], // Add dynamically
+                datasets: [{
+                    label: 'Progress (%)',
+                    data: [70, 50, 90], // Replace with dynamic data
+                    backgroundColor: ['#4caf50', '#ffeb3b', '#f44336']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Class Progress'
+                    }
+                }
+            }
+        });
+
+        // Class Performance Chart
+        const ctx2 = document.getElementById('classPerformanceChart').getContext('2d');
+        const classPerformanceChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['1ITSE01', '2ITSE01', '3ITSE01', '2ITSE02', '2ITMAGD01'], // Grade categories
+                datasets: [{
+                    label: 'Performance',
+                    data: [13, 25, 9, 15, 10], // Replace with dynamic data
+                    backgroundColor: ['#4caf50', '#2196f3', '#ffeb3b', '#ff9800', '#f44336']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Class Performance Distribution'
+                    }
+                }
+            }
+        });
+    });
+
+    // Grade Submission Logic
+    document.getElementById('gradeForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const studentName = document.getElementById('studentName').value;
+        const subject = document.getElementById('subject').value;
+        const grade = document.getElementById('grade').value;
+
+        // Add logic to save grade (e.g., via AJAX)
+        alert(`Grade submitted: ${studentName}, ${subject}, Grade: ${grade}`);
+    });
+
+    function viewClass(className) {
+        alert(`Viewing details for ${className}`);
+        // Add logic to redirect to a detailed class view
+    }
+</script>
+ <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+<script>
+     window.addEventListener('load', function() {
+        // Delay for 2 seconds (2000 milliseconds) before hiding the loader
+        setTimeout(function() {
+            document.querySelector('.loader_bg').classList.add('hidden');
+        }, 1000); // Adjust the delay time in milliseconds as needed
+    });
+
+
+</script>
+
+</body>
+</html>
