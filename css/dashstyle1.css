@@ -1,0 +1,410 @@
+  /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6f7ff; /* Light blue background */
+            display: flex;
+            flex-direction: column; /* Column layout for better structure */
+        }
+
+        /* Header Styles */
+        .header {
+            position: relative;
+            background-image: url('images/header-background.png'); /* Replace with your header background image */
+            height: 300px;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #add8e6; /* Green color for navigation */
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .navbar a {
+            color: #00008b;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .navbar a img {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+        }
+
+        .navbar a:hover {
+            background-color: #b0c4de;
+            transform: translateY(-2px);
+        }
+
+        .navbar a.active {
+            font-weight: bold;
+            text-decoration: underline;
+            border-bottom: 2px solid white;
+        }
+
+        /* User Info Section */
+        .user-info {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background-color: #fff;
+        }
+
+        .username, .learning-style {
+            display: flex;
+            align-items: center;
+        }
+
+        .username img, .learning-style img {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap; /* Enable wrapping for better organization */
+            gap: 20px; /* Space between sections */
+        }
+
+        /* Learning Progress Section */
+        .progress-section {
+            flex: 2;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Syllabus Overview Section */
+
+        .syllabus-overview {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        .syllabus-item img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+       .syllabus-item {
+           display: flex; /* Use flexbox to align items horizontally */
+           align-items: center; /* Vertically center the icon and text */
+           margin-bottom: 20px;
+       }
+
+     .section-title {
+        display: block;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+
+       .subtopics {
+           margin-left: 40px; /* Indent subtopics slightly under the title */
+           margin-top: 10px;
+           display: none; /* Hidden by default */
+     }
+
+    .subtopics ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .subtopic-icon {
+        width: 15px;
+        height: 15px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+        /* Progress Bar */
+        .progress-bar {
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-bar-fill {
+            background-color: #4caf50;
+            height: 20px;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        /* Audio and YouTube Icons */
+        .audio-icon, .youtube-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        /* Floating Audio Player Styles */
+        .audio-player {
+            display: none; /* Hide by default */
+            position: fixed; /* Fix position */
+            bottom: 20px; /* Position from bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center alignment */
+            background: white; /* Background for better visibility */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            padding: 10px; /* Padding for aesthetics */
+            z-index: 1000; /* Ensure it stays on top */
+        }
+        /* Support Chat Button */
+        .support-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .support-chat img {
+            width: 30px;
+            height: 30px;
+        }
+
+      
+        /* Chart Container */
+        .chart-container {
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background-color: white; /* White background */
+            padding: 20px; /* Padding around the chart */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            margin-top: 20px; /* Space above the chart */
+            width: 89%; /* Full width for responsiveness */
+        }
+
+        /* Chart Size */
+        canvas {
+            max-width: 200%; /* Responsive */
+            max-height: 400px; /* Set max height */
+        }
+
+.syllabus-item {
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.section-title {
+    font-weight: bold;
+    color: #007BFF; /* Optional color for the section title */
+}
+
+.subtopics {
+    padding-left: 20px; /* Indent subtopics */
+}
+
+.subtopics ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+.subtopics li {
+    margin: 5px 0; /* Spacing between subtopics */
+    font-size: 14px; /* Smaller font size */
+}
+
+.subtopic-icon {
+    width: 12px; /* Smaller width for the icon */
+    height: 12px; /* Smaller height for the icon */
+    vertical-align: middle; /* Align icon with text */
+    margin-right: 5px; /* Space between icon and text */
+}
+
+.loader_bg {
+    position: fixed;
+    z-index: 9999;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader img {
+    width: 200px; /* Increase the width of the logo */
+    height: auto; /* Adjust the height proportionally */
+}
+.hidden {
+    display: none;
+}
+
+/* New Interactive Activities Container */
+        .interactive-activities {
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .interactive-activities h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .activity {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .activity p {
+            margin-bottom: 10px;
+        }
+        .activity button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .activity button:hover {
+            background-color: #45a049;
+        }
+		
+		/* Styling for the Enrolled Classes Section */
+.enrolled-classes-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.enrolled-classes-section h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.class-selection-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adds space between the cards */
+    justify-content: center; /* Centers the cards */
+}
+
+.class-selection-container label {
+    font-weight: bold;
+    color: #555;
+}
+
+#class-select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+}
+
+.select-class-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.select-class-button:hover {
+    background-color: #0056b3;
+}
+
+.class-selection-container {
+        display: flex;
+        flex-wrap: wrap;
+		flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+    }
+    .class-card {
+    border: 2px solid #007BFF; /* Add border if needed */
+    padding: 20px; /* Padding inside each card */
+    width: 250px; /* Set a fixed width for the cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: for a subtle shadow */
+    text-align: center; /* Center the content */
+}
+    .class-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.2em;
+    }
+    .select-class-button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .select-class-button:hover {
+        background-color: #0056b3;
+    }
+    .class-card:hover {
+        transform: translateY(-5px);
+    }
+	
+	
