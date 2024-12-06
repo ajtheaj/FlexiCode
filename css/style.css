@@ -155,28 +155,31 @@ button:focus {
 }
 
 .video-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Full viewport height */
-            background-color: #f0f0f0; /* Light background for contrast */
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f0f0; /* Light background for contrast */
+}
 
-        /* Enhanced video styling */
-        video {
-            max-width: 80%;
-            border: 5px solid white; 
-            border-radius: 15px; /* Rounded corners */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Cool shadow effect */
-            background-color: #000; /* Ensure video background is black */
-        }
+/* Enhanced iframe styling */
+iframe {
+    width: 900px; /* Increased width for a larger video */
+    height: 500px; /* Adjusted height to maintain 16:9 aspect ratio */
+    border: 5px solid white;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Cool shadow effect */
+    background-color: #000; /* Ensure iframe background is black */
+}
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            video {
-                max-width: 100%; /* Full width on smaller screens */
-            }
-        }
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    iframe {
+        width: 100%; /* Full width on smaller screens */
+        height: 56.25vw; /* Maintain 16:9 ratio on smaller screens */
+    }
+}
+
 ul,
 li,
 ol {
