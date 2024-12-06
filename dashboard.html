@@ -5,21 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexiCode Learning Dashboard</title>
 <link rel="icon" href="images/flexiicon.jpg" type="image/x-icon" />
- 
+  <link rel="stylesheet" href="css/dashstyle1.css">
      
-
-    <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e6f7ff; /* Light blue background */
-            display: flex;
-            flex-direction: column; /* Column layout for better structure */
-        }
-
-        /* Header Styles */
+	 <style>
+	  /* Header Styles */
         .header {
             position: relative;
             background-image: url('images/header-background.png'); /* Replace with your header background image */
@@ -29,281 +18,7 @@
             text-align: center;
             width: 100%;
         }
-
-        .header-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* Navigation Bar Styles */
-        .navbar {
-            background-color: #add8e6; /* Green color for navigation */
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            width: 100%;
-        }
-
-        .navbar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .navbar li {
-            margin: 0 15px;
-        }
-
-        .navbar a {
-            color: #00008b;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            padding: 10px 15px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .navbar a img {
-            width: 15px;
-            height: 15px;
-            margin-right: 5px;
-        }
-
-        .navbar a:hover {
-            background-color: #b0c4de;
-            transform: translateY(-2px);
-        }
-
-        .navbar a.active {
-            font-weight: bold;
-            text-decoration: underline;
-            border-bottom: 2px solid white;
-        }
-
-        /* User Info Section */
-        .user-info {
-            display: flex;
-            justify-content: space-around;
-            padding: 15px;
-            background-color: #fff;
-        }
-
-        .username, .learning-style {
-            display: flex;
-            align-items: center;
-        }
-
-        .username img, .learning-style img {
-            width: 15px;
-            height: 15px;
-            margin-right: 5px;
-        }
-
-        /* Main Content Area */
-        .main-content {
-            padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap; /* Enable wrapping for better organization */
-            gap: 20px; /* Space between sections */
-        }
-
-        /* Learning Progress Section */
-        .progress-section {
-            flex: 2;
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Syllabus Overview Section */
-
-        .syllabus-overview {
-            flex: 1;
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        
-        .syllabus-item img {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-        }
-
-       .syllabus-item {
-           display: flex; /* Use flexbox to align items horizontally */
-           align-items: center; /* Vertically center the icon and text */
-           margin-bottom: 20px;
-       }
-
-     .section-title {
-        display: block;
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: bold;
-        margin-left: 10px;
-        vertical-align: middle;
-    }
-
-
-       .subtopics {
-           margin-left: 40px; /* Indent subtopics slightly under the title */
-           margin-top: 10px;
-           display: none; /* Hidden by default */
-     }
-
-    .subtopics ul {
-        list-style-type: none;
-        padding-left: 0;
-    }
-
-    .subtopic-icon {
-        width: 15px;
-        height: 15px;
-        margin-right: 8px;
-        vertical-align: middle;
-    }
-
-        /* Progress Bar */
-        .progress-bar {
-            background-color: #f3f3f3;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress-bar-fill {
-            background-color: #4caf50;
-            height: 20px;
-            color: white;
-            text-align: center;
-            line-height: 20px;
-        }
-
-        /* Audio and YouTube Icons */
-        .audio-icon, .youtube-icon {
-            width: 20px;
-            height: 20px;
-            margin-left: 5px;
-            cursor: pointer; /* Change cursor to pointer */
-        }
-
-        /* Floating Audio Player Styles */
-        .audio-player {
-            display: none; /* Hide by default */
-            position: fixed; /* Fix position */
-            bottom: 20px; /* Position from bottom */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Center alignment */
-            background: white; /* Background for better visibility */
-            border-radius: 5px; /* Rounded corners */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-            padding: 10px; /* Padding for aesthetics */
-            z-index: 1000; /* Ensure it stays on top */
-        }
-        /* Support Chat Button */
-        .support-chat {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4caf50;
-            border: none;
-            border-radius: 50%;
-            padding: 10px;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .support-chat img {
-            width: 30px;
-            height: 30px;
-        }
-
-      
-        /* Chart Container */
-        .chart-container {
-            display: flex; /* Use flexbox for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            background-color: white; /* White background */
-            padding: 20px; /* Padding around the chart */
-            border-radius: 5px; /* Rounded corners */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-            margin-top: 20px; /* Space above the chart */
-            width: 100%; /* Full width for responsiveness */
-        }
-
-        /* Chart Size */
-        canvas {
-            max-width: 200%; /* Responsive */
-            max-height: 400px; /* Set max height */
-        }
-
-.syllabus-item {
-    margin: 15px 0;
-    cursor: pointer;
-}
-
-.section-title {
-    font-weight: bold;
-    color: #007BFF; /* Optional color for the section title */
-}
-
-.subtopics {
-    padding-left: 20px; /* Indent subtopics */
-}
-
-.subtopics ul {
-    list-style: none; /* Remove default list styling */
-    padding: 0; /* Remove default padding */
-}
-
-.subtopics li {
-    margin: 5px 0; /* Spacing between subtopics */
-    font-size: 14px; /* Smaller font size */
-}
-
-.subtopic-icon {
-    width: 12px; /* Smaller width for the icon */
-    height: 12px; /* Smaller height for the icon */
-    vertical-align: middle; /* Align icon with text */
-    margin-right: 5px; /* Space between icon and text */
-}
-
-.loader_bg {
-    position: fixed;
-    z-index: 9999;
-    background: #fff;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.loader img {
-    width: 200px; /* Increase the width of the logo */
-    height: auto; /* Adjust the height proportionally */
-}
-.hidden {
-    display: none;
-}
-
-
-    </style>
- 
+  </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
  
 <script>
@@ -323,22 +38,21 @@ function playAudio(file) {
 }
 
     </script>
+	<!-- loader -->
+
 </head>
-<!-- loader -->
-<div class="loader_bg">
-    <div class="loader">
-        <img src="images/flexiloader.jpg" alt="Loading..." />
-    </div>
-</div>
+
 
 <body>
- 
-     
-    <!-- Header with Picture -->
+  <div class="loader_bg">
+         <div class="loader"><img src="images/flexiloader.jpg" alt="#"/></div>
+      </div>
+	  
+	  
     <div class="header">
         <div class="header-overlay">
-            <h1>FlexiCode Learning Dashboard</h1>
-            <p>Empowering Your Learning Journey</p>
+            <h1>Student Learning Dashboard</h1>
+            <p>Your learning progress and tools at a glance</p>
         </div>
     </div>
 
@@ -369,13 +83,38 @@ function playAudio(file) {
             <img src="images/user.png" alt="User Icon"> Good day! Welcome to the Dashboard!
         </div>
         <div class="learning-style">
-            <img src="images/headphones.png" alt="Learning Style Icon"> Preferred Learning Style: Audio
+            <img src="images/book.png" alt="Learning Style Icon"> Preferred Learning Style: ???
         </div>
     </div>
 
     <!-- Main Content Area -->
     <div class="main-content">
-
+<!-- Enrolled Classes Selection Section -->
+<div class="enrolled-classes-section">
+    <h2>Enrolled Classes</h2>
+    <div class="class-selection-container">
+        <div class="class-card">
+            <h3>Software Project Management [2ITSE01]</h3>
+            <button class="select-class-button">Select</button>
+        </div>
+        <div class="class-card">
+            <h3>Data Structures and Algorithms [2ITSE01]</h3>
+            <button class="select-class-button">Select</button>
+        </div>
+        <div class="class-card">
+            <h3>Web Systems and Design [2ITSE01]</h3>
+            <button class="select-class-button">Select</button>
+        </div>
+        <div class="class-card">
+            <h3>Business Information Systems [2ITSE01]</h3>
+            <button class="select-class-button">Select</button>
+        </div>
+        <div class="class-card">
+            <h3>Platform Technologies I [2ITSE01]</h3>
+            <button class="select-class-button">Select</button>
+        </div>
+    </div>
+	</div>
         <!-- Learning Progress Section -->
         <div class="progress-section">
             <h2>Your Learning Progress</h2>
@@ -506,10 +245,66 @@ function playAudio(file) {
                         </a>
                     </li>
                 </ul>
+				<!-- Pie Chart Section -->
+    <div class="chart-container">
+        <canvas id="learningProgressChart"></canvas>
+    </div>
+    
+    <div class="score-tally-section" style="display: flex; align-items: flex-start; justify-content: center; margin-top: 20px;">
+    </div>
             </div>
+			
         </div>
+		
+		<!-- New Interactive Activities Section -->
+        <div class="interactive-activities">
+            <h2>Pending Activities</h2>
 
-<!-- Syllabus Overview Section -->
+            <!-- Fill-in-the-Blanks Activity -->
+            <div class="activity">
+                <p><b>Activity 1: Fill in the Blanks</b></p>
+                <p>Complete the following code:</p>
+                <p><code>public class Main { public static void main(String[] args) { System.out.println("Hello, ___!"); } }</code></p>
+                <button onclick="alert('Great job! The answer is World.')">Solve Problem</button>
+            </div>
+
+            <!-- Visual Game Activity -->
+            <div class="activity">
+                <p><b>Activity 2: Visual Puzzle</b></p>
+                <p>Arrange the blocks to match the pattern.</p>
+                <!-- Visual game code could go here -->
+                <button onclick="alert('Puzzle solved!')">Solve Problem</button>
+            </div>
+			   <!-- New Activity 3: Code Debugging Challenge -->
+    <div class="activity">
+        <p><b>Activity 3: Code Debugging Challenge</b></p>
+        <p>Identify and fix the errors in the following code:</p>
+        <p><code>public class Main { public static void main(String[] args) { System.out.println("Welcome to coding"); } </code></p>
+        <button onclick="alert('Great job! Ensure all syntax is correct and the main method is properly declared.')">Solve Problem</button>
+    </div>
+
+    <!-- New Activity 4: Logic Puzzle -->
+    <div class="activity">
+        <p><b>Activity 4: Logic Puzzle</b></p>
+        <p>Use logical reasoning to solve this problem:</p>
+        <p>Write a function that checks if a number is prime.</p>
+        <button onclick="alert('Try writing a loop that checks divisibility from 2 to sqrt(number).')">Solve Problem</button>
+    </div>
+
+    <!-- New Activity 5: Code Completion -->
+    <div class="activity">
+        <p><b>Activity 5: Code Completion</b></p>
+        <p>Complete the missing lines in the following code snippet:</p>
+        <p><code>public class Main { public static void main(String[] args) { int x = 5; __; System.out.println(x); } }</code></p>
+        <button onclick="alert('Great job! The missing line should increment x by 1.')">Solve Problem</button>
+		
+    </div>
+</div>
+   </div>	
+    </div>
+	
+
+		<!-- Syllabus Overview Section -->
 <div class="syllabus-overview">
    <h2>Syllabus Overview</h2>
 
@@ -585,15 +380,13 @@ function playAudio(file) {
     </div>
 </div>
 
-
-
-   <!-- Pie Chart Section -->
-    <div class="chart-container">
-        <canvas id="learningProgressChart"></canvas>
-    </div>
-<div class="score-tally-section" style="display: flex; align-items: flex-start; justify-content: center; margin-top: 20px;">
-   
+		
+  
  
+	
+	
+	
+</div>
 <!-- Audio Player -->
     <audio id="audioPlayer" controls style="display:none; position:fixed; bottom: 50%; left: 50%; transform: translate(-50%, 50%);">
     Your browser does not support the audio tag.
@@ -671,6 +464,9 @@ function toggleSubtopics(subtopicsId) {
 
 
 </script>
-
+  <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
 </body>
 </html>
